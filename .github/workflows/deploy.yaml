@@ -37,7 +37,6 @@ jobs:
           docker push ${{ secrets.DOCKER_USERNAME }}/multi-server-k8s-gh:${{ env.SHA }}
           docker push ${{ secrets.DOCKER_USERNAME }}/multi-worker-k8s-gh:${{ env.SHA }}
 
-
       - name: Deploy to EC2 Minikube
         uses: appleboy/ssh-action@v1
         with:
