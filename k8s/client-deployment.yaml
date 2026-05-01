@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
       - name: client
-        image: nataliaveselova/multi-client:v2
+        image: nataliaveselova/multi-client
         ports:
           - containerPort: 3000
