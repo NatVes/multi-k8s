@@ -3,11 +3,11 @@ kind: Service
 metadata: 
   name: client-cluster-ip-service
 spec:
-  # type: ClusterIP
-  type: NodePort
+  type: ClusterIP
+  # type: NodePort
   selector:
     component: web
   ports:
     - port: 3000 #need to get to port 3000 on the service
       targetPort: 3000 #to get to port 3000 on the container
-      nodePort: 30001
+      # nodePort: 30001
