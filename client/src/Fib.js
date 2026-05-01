@@ -18,11 +18,26 @@ class Fib extends Component {
     this.setState({ values: values.data });
   }
 
+  // async fetchIndexes() {
+  //   const seenIndexes = await axios.get('/api/values/all');
+  //   this.setState({
+  //     seenIndexes: seenIndexes.data,
+  //   });
+  // }
+
   async fetchIndexes() {
-    const seenIndexes = await axios.get('/api/values/all');
-    this.setState({
-      seenIndexes: seenIndexes.data,
-    });
+    try {
+      const response = await axios.get('/api/values/all');
+
+      console.log('/api/values/all response:', response.data);
+
+      this.setState({
+        seenIndexes: Array.isArray(response.data) ? response.data : [],
+      });
+    } catch (err) {
+      console.error('fetchIndexes error:', err);
+      this.setState({ seenIndexes: [] });
+    }
   }
 
   handleSubmit = async (event) => {
@@ -34,7 +49,16 @@ class Fib extends Component {
     this.setState({ index: '' });
   };
 
+  // renderSeenIndexes() {
+  //   return this.state.seenIndexes.map(({ number }) => number).join(', ');
+  // }
+
   renderSeenIndexes() {
+    if (!Array.isArray(this.state.seenIndexes)) {
+      console.log('seenIndexes is not array:', this.state.seenIndexes);
+      return '';
+    }
+
     return this.state.seenIndexes.map(({ number }) => number).join(', ');
   }
 
